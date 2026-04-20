@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeşil İz | Karbon Ayak İzi Takipçisi</title>
+    <meta name="description" content="Yeşil İz ile karbon ayak izinizi hesaplayın, takip edin ve doğaya bıraktığınız izi iyileştirin.">
+    
+    <!-- PWA Meta Tags & Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Yeşil İz">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="ph-fill ph-leaf"></i>
+                <span>Yeşil İz</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-page="home">
+                    <i class="ph ph-house"></i>
+                    <span>Ana Sayfa</span>
+                </li>
+                <li data-page="calculator">
+                    <i class="ph ph-calculator"></i>
+                    <span>Hesaplayıcı</span>
+                </li>
+                <li data-page="dashboard">
+                    <i class="ph ph-chart-line-up"></i>
+                    <span>İstatistikler</span>
+                </li>
+                <li data-page="tasks">
+                    <i class="ph ph-check-circle"></i>
+                    <span>Eko-Görevler</span>
+                </li>
+            </ul>
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=Kullanici&background=10b981&color=fff" alt="User Profile">
+                <div class="user-info">
+                    <span class="user-name">Doğa Dostu</span>
+                    <span class="user-level">Seviye 3</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="main-content">
+            <!-- Pages will be injected here by app.js -->
+        </main>
+    </div>
+
+    <!-- Templates for SPA Pages -->
+    <template id="page-home">
+        <div class="page animate-fade-in">
+            <header class="page-header">
+                <h1>Merhaba, <span class="highlight">Doğa Dostu</span> 👋</h1>
+                <p>Bugün dünyamız için harika bir gün!</p>
+            </header>
+            
+            <div class="hero-section glass-card">
+                <div class="hero-content">
+                    <h2>Küçük Adımlar, Büyük Etkiler</h2>
+                    <p>Günlük alışkanlıklarınızı değiştirerek karbon ayak izinizi nasıl azaltabileceğinizi keşfedin. Hemen hesaplayın ve doğaya olumlu bir iz bırakın.</p>
+                    <button class="btn btn-primary" onclick="app.navigateTo('calculator')">Hemen Hesapla <i class="ph ph-arrow-right"></i></button>
+                </div>
+                <div class="hero-image">
+                    <!-- A visual element or abstract shapes -->
+                    <div class="abstract-shape shape-1"></div>
+                    <div class="abstract-shape shape-2"></div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
+                        <i class="ph ph-tree"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>Kurtarılan Ağaç</h3>
+                        <p class="stat-value">12</p>
+                    </div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+                        <i class="ph ph-drop"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>Tasaruflu Su (Litre)</h3>
+                        <p class="stat-value">450</p>
+                    </div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                        <i class="ph ph-lightning"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>Tasaruflu Enerji (kWh)</h3>
+                        <p class="stat-value">85</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="page-calculator">
+        <div class="page animate-fade-in">
+            <header class="page-header">
+                <h1>Karbon Ayak İzi <span class="highlight">Hesaplayıcı</span></h1>
+                <p>Haftalık alışkanlıklarınızı girerek etkinizi görün.</p>
+            </header>
+
+            <div class="calculator-container glass-card">
+                <form id="calc-form">
+                    <div class="form-group">
+                        <label><i class="ph ph-car"></i> Haftalık Araç Kullanımı (km)</label>
+                        <input type="number" id="calc-transport" placeholder="Örn: 150" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="ph ph-lightning"></i> Aylık Elektrik Faturası (TL)</label>
+                        <input type="number" id="calc-energy" placeholder="Örn: 500" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="ph ph-fork-knife"></i> Et Tüketimi Sıklığı</label>
+                        <select id="calc-diet">
+                            <option value="high">Hemen her gün</option>
+                            <option value="medium" selected>Haftada birkaç gün</option>
+                            <option value="low">Nadiren</option>
+                            <option value="vegetarian">Vejetaryen</option>
+                            <option value="vegan">Vegan</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Hesapla</button>
+                </form>
+
+                <div id="calc-result" class="calc-result hidden">
+                    <h3>Tahmini Aylık Karbon Ayak İziniz</h3>
+                    <div class="result-value"><span id="result-number">0</span> kg CO₂</div>
+                    <p id="result-message">Daha iyi olabilir! Eko-görevleri inceleyin.</p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="page-dashboard">
+        <div class="page animate-fade-in">
+            <header class="page-header">
+                <h1>İstatistikler ve <span class="highlight">Gelişim</span></h1>
+                <p>Geçmişten bugüne çevresel etkiniz.</p>
+            </header>
+            
+            <div class="dashboard-grid">
+                <div class="chart-container glass-card main-chart">
+                    <h3>Aylık Karbon Salınımı (kg CO₂)</h3>
+                    <div class="mock-chart">
+                        <div class="bar" style="height: 80%;"><span>Oca</span></div>
+                        <div class="bar" style="height: 70%;"><span>Şub</span></div>
+                        <div class="bar" style="height: 90%;"><span>Mar</span></div>
+                        <div class="bar" style="height: 50%;"><span>Nis</span></div>
+                        <div class="bar" style="height: 40%; background: var(--primary);"><span>May</span></div>
+                    </div>
+                    <p class="chart-note">Harika gidiyorsunuz! Bu ay %20 düşüş var.</p>
+                </div>
+                
+                <div class="glass-card activity-feed">
+                    <h3>Son Aktiviteler</h3>
+                    <ul class="activities">
+                        <li>
+                            <div class="activity-icon"><i class="ph ph-bicycle"></i></div>
+                            <div class="activity-info">
+                                <h4>İşe bisikletle gidildi</h4>
+                                <span>Bugün, 09:00</span>
+                            </div>
+                            <div class="activity-points">+15 Puan</div>
+                        </li>
+                        <li>
+                            <div class="activity-icon"><i class="ph ph-plant"></i></div>
+                            <div class="activity-info">
+                                <h4>Vegan öğün tercih edildi</h4>
+                                <span>Dün, 13:30</span>
+                            </div>
+                            <div class="activity-points">+10 Puan</div>
+                        </li>
+                        <li>
+                            <div class="activity-icon"><i class="ph ph-recycle"></i></div>
+                            <div class="activity-info">
+                                <h4>Geri dönüşüm yapıldı</h4>
+                                <span>2 gün önce</span>
+                            </div>
+                            <div class="activity-points">+5 Puan</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="page-tasks">
+        <div class="page animate-fade-in">
+            <header class="page-header">
+                <h1><span class="highlight">Eko-Görevler</span></h1>
+                <p>Bu görevleri tamamlayarak doğaya katkıda bulunun ve puan kazanın.</p>
+            </header>
+
+            <div class="tasks-grid">
+                <div class="task-card glass-card">
+                    <div class="task-header">
+                        <div class="task-icon"><i class="ph ph-drop"></i></div>
+                        <span class="task-points">10 Puan</span>
+                    </div>
+                    <h3>Kısa Duş Alın</h3>
+                    <p>Duş sürenizi 5 dakikaya indirerek ciddi miktarda su tasarrufu sağlayın.</p>
+                    <button class="btn btn-outline" onclick="app.completeTask(this)">Tamamla</button>
+                </div>
+                
+                <div class="task-card glass-card">
+                    <div class="task-header">
+                        <div class="task-icon"><i class="ph ph-bag"></i></div>
+                        <span class="task-points">15 Puan</span>
+                    </div>
+                    <h3>Bez Çanta Kullanın</h3>
+                    <p>Alışverişe giderken plastik poşet yerine kendi bez çantanızı götürün.</p>
+                    <button class="btn btn-outline" onclick="app.completeTask(this)">Tamamla</button>
+                </div>
+
+                <div class="task-card glass-card">
+                    <div class="task-header">
+                        <div class="task-icon"><i class="ph ph-plug"></i></div>
+                        <span class="task-points">20 Puan</span>
+                    </div>
+                    <h3>Fişleri Çekin</h3>
+                    <p>Kullanmadığınız elektronik aletlerin fişini çekerek hayalet enerji tüketimini önleyin.</p>
+                    <button class="btn btn-outline" onclick="app.completeTask(this)">Tamamla</button>
+                </div>
+                
+                <div class="task-card glass-card">
+                    <div class="task-header">
+                        <div class="task-icon"><i class="ph ph-coffee"></i></div>
+                        <span class="task-points">25 Puan</span>
+                    </div>
+                    <h3>Termos Kullanın</h3>
+                    <p>Karton bardak kullanmak yerine kahvenizi kendi termosunuzda alın.</p>
+                    <button class="btn btn-outline" onclick="app.completeTask(this)">Tamamla</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    }, err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
